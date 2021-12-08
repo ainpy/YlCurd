@@ -1,0 +1,22 @@
+{
+  "name": "ainpy/yl-curd",
+  "description": "curd",
+  "authors": [
+    {
+      "name": "ainpy",
+      "email": "ainpy@sina.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "ainpy\\YlCurd\\": "./src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "ainpy\\YlCurd\\LaravelServiceProvider"
+      ]
+    }
+  }
+}

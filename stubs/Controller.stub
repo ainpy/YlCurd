@@ -1,0 +1,77 @@
+<?php
+
+{{namespace}}
+
+{{useRequest}}
+{{useResource}}
+{{useModel}}
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+class {{modelName}}Controller extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('');
+    }
+
+    /**
+     * Notes:
+     * Created by LT on {{time}}
+     * @param Request $request
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function index(Request $request)
+    {
+        $query = {{modelName}}::filter();
+        return {{modelName}}Resource::collection(
+            $request->has('page') ? $query->paginate(per()) : $query->get()
+        );
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store({{modelName}}Request $request)
+    {
+        {{modelName}}::create($request->all());
+    }
+
+    /**
+     * Notes:
+     * Created by Lt on {{time}}
+     * @param $id
+     * @return {{modelName}}Resource
+     */
+    public function show($id)
+    {
+        return {{modelName}}Resource::make({{modelName}}::findOrFail($id));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update({{modelName}}Request $request, $id)
+    {
+        {{modelName}}::where('id', $id)->updateFillable($request->all());
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $m = {{modelName}}::findOrFail($id);
+        $m->delete();
+    }
+}
